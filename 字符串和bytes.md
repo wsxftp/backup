@@ -56,11 +56,7 @@
 
   ![](images/format4.png)
 
-
-
-  ![](images/format1.png)
-
-  总结
+* 总结
   ```
   {}  按照顺序，使用位置参数
   {数字 i} 会把位置参数当成一个列表 args, args[i]  当i不是args的索引的时候， 抛出IndexError

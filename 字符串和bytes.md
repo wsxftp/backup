@@ -56,7 +56,7 @@
 
   ![](images/format4.png)
 
-  `'{{{}}}{}'.format('{1}',4)`输出大括号的方法
+
 
   ![](images/format1.png)
 

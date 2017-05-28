@@ -4,7 +4,7 @@
   * [iptables](iptables/iptables.md)
     * [基础用法](iptables/basic.md)
     * [拓展用法](iptables/extensions.md)
-  * [nginx核心模块](nginx/nginx核心模块.md)
+  * [nginx的http核心模块](nginx/nginx的http核心模块.md)
   * [nginx模块](nginx/Nginx模块.md)
   * [lvs](lvs/内容文档.md)
   * [zabbix](zabbix/zabbix.md)

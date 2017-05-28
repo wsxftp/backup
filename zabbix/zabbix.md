@@ -197,7 +197,8 @@ madie通知管理员的媒介，媒介的方式
 在客户端定义如下
 
 ```bash
-vim /etc/zabbix/zabbix_agentd.conf #编辑parameter
+#编辑parameter
+vim /etc/zabbix/zabbix_agentd.conf
 #   Format: UserParameter=<key>,<shell command>
 UserParameter=mem.total,free | awk '/Mem/ {print$2}'
 UserParameter=mem.info[*],cat /proc/meminfo| awk '/^$1/ {print $$2}'
@@ -207,7 +208,8 @@ systemctl restart zabbix-agent.service
 服务端引用
 
 ```bash
-zabbix_get -s 172.16.29.20 -p 10050 -k mem.total #使用命令直接查看试试
+#使用命令直接查看试试
+zabbix_get -s 172.16.29.20 -p 10050 -k mem.total
 zabbix_get -s 172.16.29.20 -p 10050 -k mem.info[MemFree]
 zabbix_get -s 172.16.29.20 -p 10050 -k mem.info[MemTotal]
 ```
@@ -252,7 +254,8 @@ screen是在一个页面里一次展示多少张图，以怎样的体位展示�
 客户端配置
 
 ```bash
-	ServerActive=127.0.0.1，172.16.29.2 #填上服务器端的ip
+#填上服务器端的ip
+ServerActive=127.0.0.1，172.16.29.2
 ```
 
 服务器端

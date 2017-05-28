@@ -19,11 +19,11 @@
 29、`auth_basic_user_file file;`认证使用存储密码文件
 
 ```
-	location /admin/ {
+location /admin/ {
 		alias /webapps/app1/data/;
 		auth_basic "Admin Area";
 		auth_basic_user_file /etc/nginx/.ngxpasswd;
-	}
+}
 ```
 
 **注意：htpasswd命令由httpd-tools所提供；**
@@ -52,9 +52,9 @@ Reading: 6 Writing: 179 Waiting: 106
 配置示例：
 
 ```
-	location  /basic_status {
+location  /basic_status {
 		stub_status;
-	}
+}
 ```
 
 ### ngx_http_log_module模块
@@ -65,8 +65,8 @@ he ngx_http_log_module module writes request logs in the specified format.
 32、`access_log path [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]];`
 
 ```
-	access_log off;
-	访问日志文件路径，格式及相关的缓冲的配置；
+access_log off;
+访问日志文件路径，格式及相关的缓冲的配置；
 		buffer=size
 		flush=time 		
 ```
@@ -76,11 +76,11 @@ he ngx_http_log_module module writes request logs in the specified format.
 	open_log_file_cache off;
 
 ```
-		缓存各日志文件相关的元数据信息；
-		max：缓存的最大文件描述符数量；
-		min_uses：在inactive指定的时长内访问大于等于此值方可被当作活动项；
-		inactive：非活动时长；
-		valid：验正缓存中各缓存项是否为活动项的时间间隔；
+缓存各日志文件相关的元数据信息；
+max：缓存的最大文件描述符数量；
+min_uses：在inactive指定的时长内访问大于等于此值方可被当作活动项；
+inactive：非活动时长；
+valid：验正缓存中各缓存项是否为活动项的时间间隔；
 ```
 
 ### ngx_http_gzip_module：
@@ -107,11 +107,11 @@ no-cache, no-store，private：表示从被代理服务器收到的响应报文�
 示例：
 
 ```
-	gzip  on;
-	gzip_comp_level 6;
-	gzip_min_length 64;
-	gzip_proxied any;
-	gzip_types text/xml text/css  application/javascript;						
+gzip  on;
+gzip_comp_level 6;
+gzip_min_length 64;
+gzip_proxied any;
+gzip_types text/xml text/css  application/javascript;						
 ```
 
 ### ngx_http_ssl_module模块：
@@ -130,9 +130,9 @@ no-cache, no-store，private：表示从被代理服务器收到的响应报文�
 
 6、`ssl_session_timeout time;`客户端一侧的连接可以复用ssl session cache中缓存 的ssl参数的有效时长；
 
-```
 配置示例：
-	server {
+```
+server {
 		listen 443 ssl;
 		server_name www.magedu.com;
 		root /vhosts/ssl/htdocs;
@@ -140,7 +140,7 @@ no-cache, no-store，private：表示从被代理服务器收到的响应报文�
 		ssl_certificate /etc/nginx/ssl/nginx.crt;
 		ssl_certificate_key /etc/nginx/ssl/nginx.key;
 		ssl_session_cache shared:sslcache:20m;
-	}							
+}							
 ```
 
 ### ngx_http_rewrite_module模块：
@@ -157,7 +157,7 @@ The ngx_http_rewrite_module module is used to change request URI using PCRE regu
 		301：永久重定向；
 
 ```
-	[flag]：
+[flag]：
 		last：重写完成后停止对当前URI在当前location中后续的其它重写操作，而后对新的URI启动新一轮重写检查；提前重启新一轮循环；
 		break：重写完成后停止对当前URI在当前location中后续的其它重写操作，而后直接跳转至重写规则配置块之后的其它配置；结束循环；
 		redirect：重写完成后以临时重定向方式直接返回重写后生成的新URI给客户端，由客户端重新发起请求；不能以http://或https://开头；
@@ -168,11 +168,11 @@ The ngx_http_rewrite_module module is used to change request URI using PCRE regu
 2、`return`
 
 ```
-	return code [text];
-	return code URL;
-	return URL;
+return code [text];
+return code URL;
+return URL;
 
-	Stops processing and returns the specified code to a client.
+Stops processing and returns the specified code to a client.
 ```
 
 3、`rewrite_log on | off;`是否开启重写日志；
@@ -180,19 +180,19 @@ The ngx_http_rewrite_module module is used to change request URI using PCRE regu
 4、`if (condition) { ... }`引入一个新的配置上下文 ；条件满足时，执行配置块中的配置指令；server, location；
 
 ```
-	condition：
-		比较操作符：
-			==
-			!=
-			~：模式匹配，区分字符大小写；
-			~*：模式匹配，不区分字符大小写；
-			!~：模式不匹配，区分字符大小写；
-			!~*：模式不匹配，不区分字符大小写；
-		文件及目录存在性判断：
-			-e, !-e
-			-f, !-f
-			-d, !-d
-			-x, !-x
+condition：
+比较操作符：
+		==
+		!=
+		~：模式匹配，区分字符大小写；
+		~*：模式匹配，不区分字符大小写；
+		!~：模式不匹配，区分字符大小写；
+		!~*：模式不匹配，不区分字符大小写；
+文件及目录存在性判断：
+		-e, !-e
+		-f, !-f
+		-d, !-d
+		-x, !-x
 ```
 
 5、`set $variable value;`用户自定义变量 ；
@@ -247,14 +247,14 @@ location ~* ^/(pm_status|ping)$ {
 4、`fastcgi_cache_path path [levels=levels] [use_temp_path=on|off] keys_zone=name:size [inactive=time] [max_size=size] [manager_files=number] [manager_sleep=time] [manager_threshold=time] [loader_files=number] [loader_sleep=time] [loader_threshold=time] [purger=on|off] [purger_files=number] [purger_sleep=time] [purger_threshold=time];`定义fastcgi的缓存；缓存位置为磁盘上的文件系统，由path所指定路径来定义；
 
 ```
-		levels=levels：缓存目录的层级数量，以及每一级的目录数量；levels=ONE:TWO:THREE
-			leves=1:2:2
-		keys_zone=name:size
-			k/v映射的内存空间的名称及大小
-		inactive=time
-			非活动时长
-		max_size=size
-			磁盘上用于缓存数据的缓存空间上限
+levels=levels：缓存目录的层级数量，以及每一级的目录数量；levels=ONE:TWO:THREE
+		leves=1:2:2
+keys_zone=name:size
+		k/v映射的内存空间的名称及大小
+inactive=time
+		非活动时长
+max_size=size
+		磁盘上用于缓存数据的缓存空间上限
 ```
 
 5、`fastcgi_cache zone | off;`调用指定的缓存空间来缓存数据；http, server, location
@@ -312,7 +312,7 @@ regular expression：被指定的正则表达式模式匹配到的字符串；�
 ```
 valid_referers none block server_names *.magedu.com *.mageedu.com magedu.* mageedu.* ~\.magedu\.;
 if($invalid_referer) {
-	return 403;
+		return 403;
 }
 ```
 
@@ -350,23 +350,23 @@ upstream httpdsrvs {
 address的表示格式：
 
 ```bash
-		unix:/PATH/TO/SOME_SOCK_FILE
-		IP[:PORT]
-		HOSTNAME[:PORT]
+unix:/PATH/TO/SOME_SOCK_FILE
+IP[:PORT]
+HOSTNAME[:PORT]
 
-		parameters：
-				#权重，默认为1；
-				weight=number
-				#失败尝试最大次数；超出此处指定的次数时，server将被标记为不可用；
-				max_fails=number
-				#设置将服务器标记为不可用状态的超时时长；
-				fail_timeout=time
-				#当前的服务器的最大并发连接数；
-				max_conns
-				#将服务器标记为“备用”，即所有服务器均不可用时此服务器才启用；
-				backup
-				#标记为“不可用”；
-				down
+parameters：
+		#权重，默认为1；
+		weight=number
+		#失败尝试最大次数；超出此处指定的次数时，server将被标记为不可用；
+		max_fails=number
+		#设置将服务器标记为不可用状态的超时时长；
+		fail_timeout=time
+		#当前的服务器的最大并发连接数；
+		max_conns
+		#将服务器标记为“备用”，即所有服务器均不可用时此服务器才启用；
+		backup
+		#标记为“不可用”；
+		down
 ```
 
 3、`least_conn;`最少连接调度算法，当server拥有不同的权重时其为wlc;
@@ -382,8 +382,8 @@ If the consistent parameter is specified the ketama consistent hashing method wi
 示例：
 
 ```
-		hash $request_uri consistent;
-		hash $remote_addr;
+hash $request_uri consistent;
+hash $remote_addr;
 ```
 
 6、`keepalive connections;`为每个worker进程保留的空闲的长连接数量；

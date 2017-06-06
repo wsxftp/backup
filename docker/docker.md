@@ -41,3 +41,13 @@ AUFS
 `docker inpect -f {{.State.Pid}} web`
 
 cadvisor容器 分析容器运行时的状态，具有web界面展示
+
+# dockerfile
+
+## RUN指令
+
+  每个run命令都会创建新的层
+
+## CMD指令
+
+  为docker run时指定默认运行的指令

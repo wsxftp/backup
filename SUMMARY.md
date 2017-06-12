@@ -1,9 +1,6 @@
 # 下一步devops
 
 * [linux](linux.md)
-  * [iptables](iptables/iptables.md)
-    * [基础用法](iptables/basic.md)
-    * [拓展用法](iptables/extensions.md)
   * [命令集萃](命令集萃/命令集萃.md)
   * [sed](sed/sed.md)
   * [awk](awk/awk.md)
@@ -14,8 +11,13 @@
   * [zabbix](zabbix/zabbix.md)
   * [lnmp建站实验](lnmp建站实验/LNMP建站实验.md)
   * [varnish](varnish/varnish.md)
+  * [redis](redis/redis.md)
+  * [FastDFS](fastdfs/fastdfs.md)
   * [docker](docker/docker.md)
   * [wget](wget.md)
+  * [iptables](iptables/iptables.md)
+    * [基础用法](iptables/basic.md)
+    * [拓展用法](iptables/extensions.md)
 * [python](python.md)
   * [安装](安装.md)
   * [基础语法](基础语法.md)

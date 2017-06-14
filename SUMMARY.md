@@ -11,6 +11,7 @@
   * [zabbix](zabbix/zabbix.md)
   * [lnmp建站实验](lnmp建站实验/LNMP建站实验.md)
   * [varnish](varnish/varnish.md)
+  * [mariadb](mariadb/mariadb.md)
   * [redis](redis/redis.md)
   * [FastDFS](fastdfs/fastdfs.md)
   * [docker](docker/docker.md)

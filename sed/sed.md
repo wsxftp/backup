@@ -72,7 +72,7 @@ w /PATH/TO/SOMEFILE：将替换成功的行保存至文件
 
 # 示例
 
-sed -e ‘s/dog/cat/’ -e ‘s/hi/lo/’ pets
+sed -e ‘s/dog/cat/’ -e ‘s/hi/lo/gp’ pets
 
 sed –i.bak  ‘s/dog/cat/g’ pet
 

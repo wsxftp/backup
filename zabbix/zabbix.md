@@ -72,8 +72,8 @@ systemctl start marriadb.service
 mysql <<eof
 CREATE DATABASE zabbix CHARACTER SET utf8;
 GRANT ALL ON zabbix.* TO 'zbxuser'@'localhost' IDENTIFIED BY 'zbxpass';
-GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'mageedu';
-GRANT ALL ON zabbix.* TO 'zbxuser'@'172.16.%.%' IDENTIFIED BY 'mageedu';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'zbxpass';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'172.16.%.%' IDENTIFIED BY 'zbxpass';
 eof
 ```
 
@@ -100,9 +100,11 @@ vim /etc/php.ini
 #更改时区
 date.timezone = Asia/Shanghai
 systemctl restart httpd.service
-http://172.16.253.135/zabbix/setup.php
-#访问网站，使用setup.php后一定要把这个文件mv到其他不可以访问的目录下面，防止zabbix被重置，万一被重置只能找地方哭去了。
 ```
+
+使用浏览器访问http://172.16.253.135/zabbix/setup.php
+
+***zabbix初始化之后，setup.php后一定要把这个文件mv到其他不可以访问的目录下面，防止zabbix被重置，万一被重置只能找地方哭去了。***
 
 默认的用户名和密码admin/zabbix
 
@@ -264,7 +266,7 @@ ServerActive=127.0.0.1，172.16.29.2
 
 * snmp
 
-很多比较老的设备或者不装操作系统的设备，我们没有agent，这里只好借用snmp协议进行通信，snmp有三个版本v1，v2，v3，v2，v3版本虽然功能强大很多但是我们监控的是比较老旧的设备并且很多年固件没有升级的设备，这种设备基本上只支持v1，监控硬件需要监控的指标也不需要特别复杂。snmp的性能不是很好比agent差一些，能用agent就不用snmp。
+很多比较老的设备或者不装操作系统的设备，我们没有agent，这里只好借用snmp协议进行通信，snmp有三个版本v1，v2，v3，v2，v3版本虽然功能强大很多但是我们监控的是比较老旧的设备并且很多年固件没有升级的设备，这种设备基本上只支持v1，监控硬件需要监控的指标也不需要特别复杂。snmp的性能不是很好，比agent差一些，能用agent就不用snmp。
 
 客户端配置，开启snmp服务，这个方法需要根据不同的设备的情况确定
 
@@ -284,8 +286,8 @@ yum install -y mariadb-server
 mysql <<eof
 CREATE DATABASE zabbix CHARACTER SET utf8;
 GRANT ALL ON zabbix.* TO 'zbxuser'@'localhost' IDENTIFIED BY 'zbxpass';
-GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'mageedu';
-GRANT ALL ON zabbix.* TO 'zbxuser'@'172.16.%.%' IDENTIFIED BY 'mageedu';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'zbxpass';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'172.16.%.%' IDENTIFIED BY 'zbxpass';
 eof
 yum install zabbix-agent zabbix-get zabbix-sender zabbix-proxy-mysql -y
 cd /usr/share/doc/zabbix-proxy-mysql-3.2.3/ #下面三步是给zabbix提供数据库支持，创建一些数据库表
@@ -296,7 +298,8 @@ DBHost=
 DBName=
 DBUser=
 DBPassword=
-Hostname= #注意不要和服务器端重名
+#注意不要和服务器端重名
+Hostname=
 systemctl restart zabbix-proxy.service
 ```
 

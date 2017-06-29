@@ -117,11 +117,15 @@ git branch BRANCH_NAME [START_COMMIT]
 
 git branch -d BRANCH_NAME
 
+`git branch -a`列出所有分支，包括远程分支
+
 `git show-branch`查看分支及其相关的提交；
 
 `git checkout`
 
-`git checkout <branch>`检出分支；
+`git checkout <branch>`拣出分支；
+
+`git checkout -b python_mail.skin origin/python_mail.skin`拣出远程分支
 
 ## 分支合并
 
@@ -168,7 +172,11 @@ $ git merge -m "MSG"
 ## 克隆操作：
 `git clone`
 
-原始版本库存储在refs/heads/
+git clone默认会把远程仓库整个给clone下来;
+
+但只会在本地默认创建一个master分支
+
+如果远程还有其他的分支，此时用`git branch -a`查看所有分支
 
 ## Git通信协议
 

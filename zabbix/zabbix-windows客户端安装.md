@@ -1,26 +1,21 @@
-客户端下载地址http://www.zabbix.com/downloads/3.0.4/zabbix_agents_3.0.4.win.zip
+# zabbix客户端安装
+
+[zabbix客户端下载地址]http://www.zabbix.com/downloads/3.0.4/zabbix_agents_3.0.4.win.zip
 
 解压到C:\zabbix目录下
 
 修改配置文件c:\zabbix\conf\zabbix_agentd.win.conf
-
 ```bash
-vim /etc/zabbix/zabbix_agentd.conf
-
-#124.207.65.146为zabbix-server的地址
+# 124.207.65.***为zabbix-server的地址
 Server=127.0.0.1,124.207.65.***
 
-#每个被监控主机Hostname名称需不同
+# 每个被监控主机Hostname名称需不同
 Hostname=ZabbixServer
 ```
 
-安装zabbix
+安装zabbix`c:\zabbix\bin\win64\zabbix_agentd.exe -c c:\zabbix\conf\zabbix_agentd.win.conf -i`
 
-c:\zabbix\bin\win64\zabbix_agentd.exe -c c:\zabbix\conf\zabbix_agentd.win.conf -i
-
-以服务的形式启动zabbix
-
-c:\zabbix\bin\win64\zabbix_agentd.exe -c c:\zabbix\conf\zabbix_agentd.win.conf -s
+以服务的形式启动zabbix`c:\zabbix\bin\win64\zabbix_agentd.exe -c c:\zabbix\conf\zabbix_agentd.win.conf -s`
 
 开始->控制面板->管理工具->服务
 

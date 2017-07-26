@@ -1,4 +1,5 @@
-
+## zabbix安装
+zabbix服务器初始化脚本
 ```bash
 #!/bin/bash
 
@@ -16,8 +17,7 @@ yum install git -y
 yum install iftop -y
 ```
 
-zabbix安装
-
+zabbix运行环境准备脚本
 ```bash
 #!/bin/bash
 
@@ -33,26 +33,23 @@ systemctl enable mariadb.service
 # 导入数据库
 mysql <<EOF
 CREATE DATABASE zabbix CHARACTER SET utf8;
-GRANT ALL ON zabbix.* TO 'zbxuser'@'localhost' IDENTIFIED BY 'guocai888';
-GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'guocai888';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'localhost' IDENTIFIED BY 'zbpass';
+GRANT ALL ON zabbix.* TO 'zbxuser'@'127.0.0.1' IDENTIFIED BY 'zbpass';
 EOF
 ```
 
-安装zabbix
-
+zabbix安装
 ```bash
 yum install zabbix-agent zabbix-get zabbix-sender zabbix-server-mysql zabbix-web zabbix-web-mysql -y
 #下面三步是给zabbix提供数据库支持，创建一些数据库表
 cd /usr/share/doc/zabbix-server-mysql-3.0.9/
 gunzip create.sql.gz
-mysql -uzbxuser -hlocalhost -p"guocai888" -Dzabbix < create.sql
+mysql -uzbxuser -hlocalhost -p"zbpass" -Dzabbix < create.sql
 ```
 
-设置zabbix配置
-
+## 设置zabbix
+编辑/etc/zabbix/zabbix_server.conf
 ```bash
-vim /etc/zabbix/zabbix_server.conf
-
 #编辑配置文件更改如下几行数据库主机、数据库名字、数据库用户、数据库密码
 DBHost=localhost
 DBName=zabbix
@@ -61,24 +58,21 @@ DBPassword=zbxpass
 ```
 
 启动服务，开机启动
-
 ```
 systemctl start zabbix-server.service
 systemctl enable zabbix-server.service
 ```
 
 关闭linux系统图形界面
-
 ```
 systemctl set-default multi-user.target
 ```
 
 
-更改时区
 
+编辑/etc/php.ini
 ```bash
-vim /etc/php.ini
-
+# 更改时区
 date.timezone = Asia/Shanghai
 systemctl restart httpd.service
 ```

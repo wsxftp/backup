@@ -1,3 +1,0 @@
-# pygal
-
-www.pygal.org

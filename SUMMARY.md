@@ -1,7 +1,7 @@
 # 下一步devops
 
 * [Linux](linux.md)
-  * [系统初始化](系统初始化/初始化脚本.md)
+  * [系统初始化](系统初始化/初始化脚本.sh)
   * [命令集萃](命令集萃/命令集萃.md)
   * [文件操作](文件操作/文件操作.md)
   * [文本操作](文本操作/文本操作.md)
@@ -28,7 +28,8 @@
   * [Varnish](varnish/varnish.md)
   * [Mariadb](mariadb/mariadb.md)
     * [sql语句](mariadb/sql语句.md)
-    * [Mariadb配置文件](mariadb/配置文件.md)
+    * [主从及备份](mariadb/主从备份.md)
+    * [Mariadb配置文件](mariadb/配置文件.sh)
   * [Redis](redis/redis.md)
   * [FastDFS](fastdfs/fastdfs.md)
   * [Docker](docker/docker.md)

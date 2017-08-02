@@ -1,9 +1,39 @@
-# yum源配置
+
+# 本地yum源配置
 devcdrom=`grep '/dev/cdrom /media/cdrom iso9660 defaults 0 0' /etc/fstab`
 [ -z $devcdrom ] && echo '/dev/cdrom /media/cdrom iso9660 defaults 0 0' >> /etc/fstab
 sed -i s/enabled=0/enabled=1/ /etc/yum.repos.d/CentOS-Media.repo
-cat > /etc/yum.repos.d/epel.repo <<EOF
 
+# epel源配置
+[ -e /etc/yum.repos.d/epel.repo ] || cat > /etc/yum.repos.d/epel.repo <<EOF
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+        http://mirrors.aliyuncs.com/epel/7/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch/debug
+        http://mirrors.aliyuncs.com/epel/7/$basearch/debug
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl=http://mirrors.aliyun.com/epel/7/SRPMS
+        http://mirrors.aliyuncs.com/epel/7/SRPMS
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+
+EOF
 
 # 命令行补全，安装git，安装nfs挂载支持，安装iftop，用于网络监控，用于传输文件，x11转发支持
 yum -y install bash-completion git nfs-utils iftop vim lrzsz xorg-x11-xauth
@@ -11,6 +41,8 @@ yum -y install bash-completion git nfs-utils iftop vim lrzsz xorg-x11-xauth
 yum groupinstall "Development Tools" "Server Platform Deveopment" -y
 
 # 停止防火墙，关闭selinux
-systemctl stop firewalld.service
+systemctl disable firewalld.service
 sed -i s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
-```
+
+# 重启服务器
+reboot

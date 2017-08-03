@@ -30,8 +30,12 @@
     * [sql语句](mariadb/sql语句.md)
     * [主从和备份](mariadb/主从和备份.md)
     * [Mariadb配置文件](mariadb/配置文件.md)
+    * [Mariadb问题处理案例](mariadb/Mariadb问题处理案例.md)
   * [Redis](redis/redis.md)
   * [FastDFS](fastdfs/fastdfs.md)
+  * [Linux系统调优]
+    * [打开文件数](linux/打开文件数.md)
+    * [消息队列长度](linux/消息队列长度.md)
   * [Docker](docker/docker.md)
   * [wget](wget.md)
   * [iptables](iptables/iptables.md)

@@ -45,7 +45,7 @@ SET col_name1=expr1 [, col_name2=expr2 ...]
 [LIMIT row_count]
 ```
 
-示例`update update test.aaa set name='Bigking' where id=1;`
+示例`update test.aaa set name='Bigking' where id=1;`
 
 # 查看权限
 示例`show grants for 'abc'@'def'`

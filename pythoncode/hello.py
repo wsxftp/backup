@@ -7,7 +7,7 @@ for i in range(10):
 
 
 def tools(path):
-    print(path)
+    print(os.path)
 
 
 for i in range(2, 9):

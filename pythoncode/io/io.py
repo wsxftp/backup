@@ -1,0 +1,5 @@
+f = open('c:/Users/guocai/learnpython/io/1.txt', mode='r')
+# f.write('\npython write')
+f.seek(0, 2)
+print(f.read())
+f.close()

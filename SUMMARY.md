@@ -24,7 +24,7 @@
     * [自定义监控案例](zabbix/自定义监控案例.md)
     * [常用key案例](zabbix/key类型.md)
     * [MySQL监控](zabbix/mysql监控.md)
-    * [Tomcat监控](zabbix/Tomcat监控.md)
+    * [Tomcat监控](zabbix/tomcat监控.md)
     * [日志监控](zabbix/Zabbix日志监控.md)
   * [LNMP建站实验](lnmp建站实验/LNMP建站实验.md)
   * [Varnish](varnish/varnish.md)

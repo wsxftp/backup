@@ -7,7 +7,7 @@ import pwd
 import grp
 import datetime
 
-parser = argparse.ArgumentParser(prog='ls', description='use python make ls')
+parser = argparse.ArgumentParser(prog='ls', description='use python make ls', add_help=False)
 parser.add_argument('-l', dest='long_format', help='-l 以长格式显示文件信息', action='store_true')
 parser.add_argument('-h', dest='human_read', help='-h 以易读的格式返回文件大小信息', action='store_true')
 parser.add_argument('path', nargs='*', default='.')
@@ -23,8 +23,16 @@ def time_format(mtime):
     return '{:>2} {:>2} {:>2}:{:>2}'.format(dt.month, dt.day, dt.hour, dt.minute)
 
 
-def human_format(mtime):
-    
+def human_format(mtime: int) -> str:
+    if not args.human_read:
+        return mtime
+    else:
+        idex = 0
+        units = [' ', 'K', 'M', 'G', 'T', 'P']
+        while mtime >= 1024:
+            mtime //= 1024
+            idex += 1
+        return '{}{}'.format(mtime, units[idex])
 
 
 def format(iterm: pathlib.Path) -> str:
@@ -34,15 +42,13 @@ def format(iterm: pathlib.Path) -> str:
     else:
         ret = {
             "mode": stat.filemode(st.st_mode),
-            "nlink": st.st_link,
+            "nlink": st.st_nlink,
             "user": pwd.getpwuid(st.st_uid).pw_name,
             'group': grp.getgrgid(st.st_gid).gr_name,
-            "size": st.st_size,
+            "size": human_format(st.st_size),
             "mtime": time_format(st.st_mtime),
             "name": iterm
         }
-        if not args.human_read:
-            ret["size"] = 
         return '{mode} {nlink} {user} {group} {size:>8} {mtime} {name}'.format(**ret)
 
 

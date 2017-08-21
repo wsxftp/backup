@@ -1,6 +1,17 @@
+#!/usr/sbin/python3
+# coding: utf8
 import sys
 import re
 import datetime
+import argparse
+
+parser = argparse.ArgumentParser(prog='analysis http log')
+parser.add_argument('path', nargs='*', default='./access.log')
+parser.add_argument(
+    '-flow', dest='flow', action='store_true', help='-flow 计算http服务器今天流量总和')
+parser.add_argument(
+    '-error', dest='error', action='store_true', help='-error 响应码大于300请求的总数量')
+args = parser.parse_args()
 
 
 def open_log(path):
@@ -18,14 +29,23 @@ def format_log(path):
         m = o.search(line)
         # print(m)
         if not m:
-            yield {'ip': '-', 'time': '-', 'method': '-', 'url': '-', 'version': '-', 'status': '404', 'length': '0', 'referer': '-', 'ua': '-'}
+            yield {
+                'ip': '-',
+                'time': '-',
+                'method': '-',
+                'url': '-',
+                'version': '-',
+                'status': '404',
+                'length': '0',
+                'referer': '-',
+                'ua': '-'
+            }
         else:
             d = m.groupdict()
             # print(i, d)
             i += 1
-            d['time'] = datetime.datetime.strptime(
-                d['time'], '%d/%b/%Y:%H:%M:%S %z'
-            )
+            d['time'] = datetime.datetime.strptime(d['time'],
+                                                   '%d/%b/%Y:%H:%M:%S %z')
             yield d
 
 
@@ -55,10 +75,12 @@ def line_print():
 
 def main():
     # for line in format_log(open_log(sys.argv[1])):
-        # print(line)
-    result = analyzer(sys.argv[1])
-    print("today's flow:{}, today's error:{}".format(result['flow'], result[
-        'error']))
+    # print(line)
+    result = analyzer(str(args.path).rstrip(']'.lstrip('[')))
+    if args.flow:
+        print(result['flow'])
+    if args.error:
+        print(result['error'])
 
 
 if __name__ == '__main__':

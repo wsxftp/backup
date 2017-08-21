@@ -26,6 +26,7 @@
     * [MySQL监控](zabbix/mysql监控.md)
     * [Tomcat监控](zabbix/tomcat监控.md)
     * [日志监控](zabbix/Zabbix日志监控.md)
+    * [日志分析监控案例](zabbix/日志分析监控案例.md)
   * [LNMP建站实验](lnmp建站实验/LNMP建站实验.md)
   * [Varnish](varnish/varnish.md)
   * [Mariadb](mariadb/mariadb.md)

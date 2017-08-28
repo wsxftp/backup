@@ -34,7 +34,7 @@ Hostname=LinuxTest
 
 `log[/path/to/some/file,<regexp>,<encoding>,<maxlines>,<mode>,<output>]`
 
-`logtr[/path/to/some/filename_format,<regexp>,<encoding>,<maxlines>,<mode>,<output>]`
+`logrt[/path/to/some/filename_format,<regexp>,<encoding>,<maxlines>,<mode>,<output>]`
 
 `eventlog[name,<regexp>,<severity>,<source>,<eventid>,<maxlines>,<mode>]`
 
@@ -43,3 +43,9 @@ Hostname=LinuxTest
 * maxlines：一次性最多提交多少行，这个参数覆盖配置文件zabbxi_agentd.conf中的’MaxLinesPerSecond’，我们也可以留空
 * mode：默认是all，也可以是skip，skip会跳过老数据
 * output：输出给zabbix server的数据。可以是\1、\2一直\9，\1表示第一个正则表达式匹配出得内容，\2表示第二个正则表达式匹配错的内容。
+
+## logrt示例
+
+logrt["/home/zabbix/logs/^logfile[0-9]{1,3}$",,,100]
+
+logrt[E:\liumeiti\CentralService\Log\Dispatcher\2017.8\.*log$,"MySQL server has gone away",gb2312]

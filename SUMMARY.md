@@ -8,6 +8,7 @@
   * [正则表达式](正则表达式/正则表达式.md)
   * [SED](sed/sed.md)
   * [AWK](awk/awk.md)
+  * [Bash脚本编写](Bash/Bash脚本编写.md)
   * [Git](git/git.md)
     * [GitLab](git/gitlab.md)
   * [Nginx的http核心模块](nginx/nginx的http核心模块.md)

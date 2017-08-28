@@ -16,7 +16,8 @@ def parse(path):
         m = o.search(line.rstrip('\n'))
         if m:
             data = m.groupdict()
-            data['time'] = datetime.datetime.strptime(data['time'], '%d/%b/%Y:%H:%M:%S %z')
+            data['time'] = datetime.datetime.strptime(data['time'],
+                                                      '%d/%b/%Y:%H:%M:%S %z')
             yield data
 
 

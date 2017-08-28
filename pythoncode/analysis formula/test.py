@@ -12,3 +12,5 @@ d = m.groupdict()
 d['time'] = datetime.datetime.strptime(d['time'], '%d/%b/%Y:%H:%M:%S %z')
 print(d['ip'], d['time'])
 threading.Event(1)
+
+

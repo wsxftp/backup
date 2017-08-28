@@ -30,7 +30,8 @@ systemctl enable zabbix-java-gateway.service
 
 ```
 
-修改zabbix-server，配置zabbix-server调用gateway
+修改/etc/zabbix/zabbix_server.conf，配置zabbix-server调用gateway
+
 ```bash
 ### JavaGateway
 JavaGateway=127.0.0.1

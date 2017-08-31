@@ -65,7 +65,7 @@ grafana-cli plugins install grafana-piechart-panel
 
 ![](Grafana13.png)
 
-第六步，修改图形属性
+第六步，修改图形单位
 
 ![](Grafana14.png)
 

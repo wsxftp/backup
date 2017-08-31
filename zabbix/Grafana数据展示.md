@@ -72,3 +72,7 @@ grafana-cli plugins install grafana-piechart-panel
 第七步，选择需要显示统计数据
 
 ![](Grafana15.png)
+
+## 自定义的效果图
+
+![](Grafana16.png)

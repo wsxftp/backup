@@ -5,8 +5,9 @@ import datetime
 import threading
 import requests
 
-
-o = re.compile(r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"')
+o = re.compile(
+    r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"'
+)
 
 
 def read_log(path):
@@ -34,35 +35,42 @@ def agg(path='/usr/local/nginx/logs/access.log', interval=10):
     count = 0
     traffic = 0
     error = 0
+    ip_list = []
     start = datetime.datetime.now()
     for item in parse(path):
         # print(item)
         count += 1
         traffic += int(item['length'])
+        # print(traffic)
         if int(item['status']) >= 300:
             error += 1
         current = datetime.datetime.now()
         # print((current - start).total_seconds())
+        if item['ip'] not in ip_list:
+            ip_list.append(item['ip'])
+            ip = item['ip']
+        else:
+            ip = '0'
         if (current - start).total_seconds() >= interval:
             error_rate = error / count
-            send(count, traffic, error_rate)
+            send(count, traffic, error_rate, ip)
             start = current
             count = 0
-            # traffic = 0
+            traffic = 0
             error = 0
 
 
-def send(count, traffic, error_rate):
-    line = 'access_log count={},traffic={},error_rate={}'.format(
-        count, traffic, error_rate)
+def send(count, traffic, error_rate, ip):
+    line = 'access_log ip={},count={},traffic={},error_rate={}'.format(
+        ip, count, traffic, error_rate)
     # print(line)
     requests.post(
         'http://47.94.135.239:8086/write',
-        auth=('admin', 'password'),
+        auth=('admin', 'Guocai888'),
         data=line,
         params={'db': 'nginx'})
     # if res.status_code >= 300:
-    #     print(res.content)
+# print(res.content)
 
 
 if __name__ == '__main__':

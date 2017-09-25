@@ -30,6 +30,7 @@
     * [日志分析监控案例](zabbix/日志分析监控案例.md)
     * [Iterm不支持](zabbix/Iterm不支持.md)
     * [Grafana数据展示](zabbix/Grafana数据展示.md)
+    * [Zabbix微信告警](zabbbix/微信告警.md)
   * [自定义监控套件](自定义监控/自定义监控套件.md)
   * [LNMP建站实验](lnmp建站实验/LNMP建站实验.md)
   * [Varnish](varnish/varnish.md)

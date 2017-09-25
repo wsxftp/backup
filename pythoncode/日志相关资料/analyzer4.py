@@ -5,7 +5,9 @@ import datetime
 import threading
 import requests
 
-o = re.compile(r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"')
+o = re.compile(
+    r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"'
+)
 event = threading.Event()
 
 
@@ -23,7 +25,11 @@ def read_log(q, path):
 
 
 def read_worker(q, path):
-    t = threading.Thread(target=read_log, name='read-{}'.format(path), args=(q, path), daemon=True)
+    t = threading.Thread(
+        target=read_log,
+        name='read-{}'.format(path),
+        args=(q, path),
+        daemon=True)
     t.start()
 
 
@@ -58,8 +64,10 @@ def agg(q, interval=10):
 
 
 def send(count, traffic, error_rate):
-    line = 'access_log count={},traffic={},error_rate={}'.format(count, traffic, error_rate)
-    res = requests.post('http://127.0.0.1:8086/write', data=line, params={'db': 'magedu'})
+    line = 'access_log count={},traffic={},error_rate={}'.format(
+        count, traffic, error_rate)
+    res = requests.post(
+        'http://127.0.0.1:8086/write', data=line, params={'db': 'magedu'})
     if res.status_code >= 300:
         print(res.content)
 
@@ -69,6 +77,7 @@ def manager(*paths):
     for path in paths:
         read_worker(q, path)
     agg(q, 10)
+
 
 if __name__ == '__main__':
     import sys

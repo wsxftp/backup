@@ -3,7 +3,9 @@ import random
 import queue
 import threading
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s [%(threadName)s] - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s [%(threadName)s] - %(message)s')
 event = threading.Event()
 
 
@@ -23,6 +25,7 @@ def producer(q):
 def consumer(q):
     while True:
         logging.info('consume {}'.format(q.get()))
+
 
 # thread_1 = threading.Thread(target=info, name='thread-info-1', args=(1, ))
 # thread_1.start()

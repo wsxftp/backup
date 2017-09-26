@@ -2,7 +2,9 @@ import random
 import logging
 import multiprocessing
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s [%(processName)s] - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s [%(processName)s] - %(message)s')
 
 
 def producer(q):
@@ -15,6 +17,7 @@ def producer(q):
 def consumer(q):
     while True:
         logging.info('consume {}'.format(q.get()))
+
 
 q = multiprocessing.Queue()
 

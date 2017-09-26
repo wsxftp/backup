@@ -5,7 +5,9 @@ import threading
 import requests
 import multiprocessing
 
-o = re.compile(r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"')
+o = re.compile(
+    r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* .* \[(?P<time>.*)\] "(?P<method>\w+) (?P<url>[^\s]*) (?P<version>[\w|/\.\d]*)" (?P<status>\d{3}) (?P<length>\d+) "(?P<referer>[^\s]*)" "(?P<ua>.*)"'
+)
 event = multiprocessing.Event()
 
 
@@ -23,7 +25,8 @@ def read_log(path, q):
 
 
 def read_worker(path, q):
-    t = threading.Thread(target=read_log, name='reader-{}'.format(path), args=(path, q))
+    t = threading.Thread(
+        target=read_log, name='reader-{}'.format(path), args=(path, q))
     t.daemon = True
     t.start()
 
@@ -62,7 +65,8 @@ def agg_manager(q, interval=10, proc_num=4):
     for i in range(proc_num):
         out_queue = multiprocessing.Queue()
         queues.append(out_queue)
-        p = multiprocessing.Process(target=agg, name='agg-{}'.format(i), args=(q, out_queue, interval))
+        p = multiprocessing.Process(
+            target=agg, name='agg-{}'.format(i), args=(q, out_queue, interval))
         p.daemon = True
         p.start()
     while not event.is_set():
@@ -74,14 +78,16 @@ def agg_manager(q, interval=10, proc_num=4):
             total_count += count
             total_traffic += traffic
             total_error += error
-        send(total_count, total_traffic, total_error/total_count)
+        send(total_count, total_traffic, total_error / total_count)
     for x in queues:
         x.close()
 
 
 def send(count, traffic, error_rate):
-    line = 'access_log count={},traffic={},error_rate={}'.format(count, traffic, error_rate)
-    res = requests.post('http://127.0.0.1:8086/write', data=line, params={'db': 'magedu'})
+    line = 'access_log count={},traffic={},error_rate={}'.format(
+        count, traffic, error_rate)
+    res = requests.post(
+        'http://127.0.0.1:8086/write', data=line, params={'db': 'grafana'})
     if res.status_code >= 300:
         print(res.content)
 
@@ -92,10 +98,14 @@ def manager(*paths):
     for path in paths:
         read_worker(path, read_queue)
     for i in range(4):
-        p = multiprocessing.Process(target=parse, name='parse-{}'.format(i), args=(read_queue, parse_queue))
+        p = multiprocessing.Process(
+            target=parse,
+            name='parse-{}'.format(i),
+            args=(read_queue, parse_queue))
         p.daemon = True
         p.start()
     agg_manager(parse_queue)
+
 
 if __name__ == '__main__':
     import sys

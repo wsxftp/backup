@@ -51,6 +51,12 @@ SET col_name1=expr1 [, col_name2=expr2 ...]
 
 示例`update test.aaa set name='Bigking' where id=1;`
 
+## ALTER
+
+修改库的编码格式
+
+示例`alter database xxx CHARACTER SET gb2312;`
+
 ## 查看权限
 
 示例`show grants for 'abc'@'def'`

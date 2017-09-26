@@ -16,6 +16,7 @@ class CountIp(object):
                     patt_disct[key] = patt_disct.get(key, 0) + 1
         return patt_disct
 
+
     def sort2(self, patt_list):
         if len(patt_list) <= 1:
             return patt_list

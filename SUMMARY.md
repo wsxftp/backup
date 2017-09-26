@@ -33,7 +33,7 @@
     * [Zabbix微信告警](zabbix/微信告警.md)
   * [Grafana](Grafana/Grafana.md)
     * [日志分析监控](Grafana/日志分析监控.md)
-    * [视频大切文件发现](Grafana/视频大切文件发现.md)
+    * [视频大切片发现](Grafana/视频大切片发现.md)
     * [访问ip分析](Grafana/访问ip分析.md)
   * [LNMP建站实验](lnmp建站实验/LNMP建站实验.md)
   * [Varnish](varnish/varnish.md)

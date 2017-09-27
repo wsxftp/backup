@@ -6,13 +6,16 @@ import datetime
 import argparse
 
 parser = argparse.ArgumentParser(prog='analysis http log')
-parser.add_argument('path', nargs='*', default='./access.log')
+parser.add_argument('path', nargs='*', default=['./access.log'])
 parser.add_argument(
     '-flow', dest='flow', action='store_true', help='-flow 计算http服务器今天流量总和')
 parser.add_argument(
     '-error', dest='error', action='store_true', help='-error 响应码大于300请求的总数量')
-parser.add_argument('-bugstatus', dest='bugstatus', action='store_true',
-                    help='-bugstatus 无法理解的状态码')
+parser.add_argument(
+    '-bugstatus',
+    dest='bugstatus',
+    action='store_true',
+    help='-bugstatus 无法理解的状态码')
 args = parser.parse_args()
 
 
@@ -79,8 +82,15 @@ def count_data(data, ret):
 
 def analyzer(path):
     # print(path)
-    ret = {'flow': 0, '200': 0, '300': 0, '400': 0, '500': 0, 'error': 0,
-           'bugstatus': 0}
+    ret = {
+        'flow': 0,
+        '200': 0,
+        '300': 0,
+        '400': 0,
+        '500': 0,
+        'error': 0,
+        'bugstatus': 0
+    }
     for data in format_log(open_log(path)):
         ret = count_data(data, ret)
     ret['error'] = ret['300'] + ret['400'] + ret['500']

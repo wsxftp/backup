@@ -56,3 +56,33 @@ grafana监听主机的3000端口，通过浏览器访问3000端口即可
 数据采集，这里不介绍了
 
 或者使用Zabbix采集数据
+
+## 添加zabbix数据源
+
+`grafana-cli plugins install alexanderzobnin-zabbix-app`给Grafana安装zabbix插件
+
+第一步，进入添加Data Sources页面中
+
+![](datasources1.png)
+
+第二步，添加Data Sources
+
+![](datasources2.png)
+
+第三步，添加Data Sources
+
+![](datasources3.png)
+
+## 添加influxDB数据源
+
+![](datasources4.png)
+
+## 添加MySQL数据源
+
+![](datasources5.png)
+
+## 添加其它数据源
+
+***Grafana还支持很多数据源类型，内置的类型大致有这些***
+
+![](datasources6.png)

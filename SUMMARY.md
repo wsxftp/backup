@@ -9,6 +9,7 @@
   * [SED](sed/sed.md)
   * [AWK](awk/awk.md)
   * [Bash脚本编写](Bash/Bash脚本编写.md)
+  * [磁盘性能](磁盘性能/磁盘性能观测.md)
   * [Git](git/git.md)
     * [GitLab](git/gitlab.md)
   * [Nginx的http核心模块](nginx/nginx的http核心模块.md)

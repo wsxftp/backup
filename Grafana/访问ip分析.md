@@ -122,3 +122,19 @@ if __name__ == '__main__':
         # 行的配合
         insert_data(Now_time, i)
 ```
+
+## 数据库表结构
+
+```sql
+USE `grafana`;
+
+CREATE TABLE `ip_list` (
+  `time` varchar(50) DEFAULT NULL,
+  `ip` varchar(20) DEFAULT NULL,
+  `source` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+```
+
+## Grafana添加监控
+
+![](ip分析.png)
